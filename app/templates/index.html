@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <title>Lang-Note</title>
+  <script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+  </script>
+  <script src="../static/js/jquery-1.11.3.min.js"></script>
+  <script src="../static/js/submit_entry.js"></script>
+</head>
+
+<body>
+  <form method="post" name="entry">
+    <div>
+      <label for="">original</label>
+      <input type="text" name="original">
+    </div>
+    <div>
+      <label for="">translation</label>
+      <input type="text" name="translation">
+    </div>
+    <input id="entry_form" class="" type="button" value="Post!">
+  </form>
+  <span id="entry_submitted_result"></span>
+  </br>
+  <div id="entries"></div>
+  <form method="post" name="get_by_original">
+    <div>
+      <label for="">搜索：</label>
+      <input type="text" name="original">
+      <input id="get_by_original_form" type="button" value="搜索!">
+    </div>
+  </form>
+</body>
+
+</html>
