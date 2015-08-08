@@ -122,40 +122,27 @@ var display_entries = function(data) {
     one_entry.prependTo('div#entries');
 }};
 
-/*
+
 $(document).ready(function() {
   $('input#get_by_original_form').bind('click', function() {
-    // 绑定id为entry_form的button。点击后，发送表单数据，并取得json结果，然后操作dom
-    var original = $('input[name="original"]').val();
-    $.getJSON($SCRIPT_ROOT + '/entry_submit', {
-      'original': original,
-      'translation': translation
+    var original = $('input[name="get_original_input"]').val();
+    $.getJSON($SCRIPT_ROOT + '/entry_get_by_original', {
+      'original': original
     }, function(data) {
-      if(data.result === true) {
-        $("#entry_submitted_result").text("添加成功！");
+      if(data.entries) {
+        $("#entry_submitted_result").text("查询成功！结果如下");
       } else {
-        $("#entry_submitted_result").text("添加失败！");
+        $("#entry_submitted_result").text("查找失败！");
       }
       // 添加这条新的词条到词条列表中
       //
       var one_entry = $('<div class="one_entry">' +
         '<div class="original">' + original + '</div>' +
-        '<div class="translation">' + translation + '</div>' +
-        '<a href="#" class="delete_this_entry">删除<a>' +
+        '<div class="translation">' + data.entries.translation + '</div>' +
         '</div>'
       );
-      one_entry.find('.delete_this_entry').click(function(){
-        var that = this;
-        var original = $(this).parent().find('.original')[0].textContent;
-        $.getJSON($SCRIPT_ROOT + '/entry_delete', {
-          'original' : original
-        }, function(data) {
-          $(that).parent().remove();
-        });
-      });
-      one_entry.prependTo('div#entries');
+      one_entry.appendTo('div.display_search_info');
     });
     return false;
   });
 });
-*/
